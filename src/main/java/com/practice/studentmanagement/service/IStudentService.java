@@ -9,5 +9,9 @@ public interface IStudentService {
 	List<Student> getAllStudents();
 
 	void saveStudent(Student student);
+
+	Student getStudentByID(long id);
+
+	Student updateStudent(Student student);
 	
 }

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.practice.studentmanagement.entity.Student;
@@ -45,6 +46,26 @@ public class StudentController {
 	public String saveStudent(@ModelAttribute() Student student) {
 		studentService.saveStudent(student);
 		return "redirect:/students"; //redirecting to the getmapping students above
+	}
+	
+	@GetMapping("/students/edit/{id}")
+//	PathVariable is used to store the if that we get, this is not a form submission, so cannot use @RequestParam, this is different
+	public String editStudent(@PathVariable long id, Model model) {
+		model.addAttribute("student",studentService.getStudentByID(id));
+		return "edit_student";
+	}
+	
+	@PostMapping("/students/edit/{id}")
+	public String updateStudent(@PathVariable long id, @ModelAttribute Student student, Model model)
+	{
+		Student existingStudent = studentService.getStudentByID(id);
+		existingStudent.setId(id);
+		existingStudent.setEmail(student.getEmail());
+		existingStudent.setFirstName(student.getFirstName());
+		existingStudent.setLastName(student.getLastName());
+		
+		studentService.updateStudent(existingStudent);
+		return "redirect:/students";
 	}
 
 }

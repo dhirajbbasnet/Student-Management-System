@@ -31,6 +31,16 @@ public class StudentService implements IStudentService{
 	public void saveStudent(Student student) {
 		studentRepository.save(student);
 	}
+	
+	@Override
+	public Student getStudentByID(long id) {
+		return studentRepository.findById(id).get();
+	}
+	
+	@Override
+	public Student updateStudent(Student student) {
+		return studentRepository.save(student);
+	}
 
 	
 	
