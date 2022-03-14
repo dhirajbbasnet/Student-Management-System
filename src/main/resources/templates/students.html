@@ -66,7 +66,9 @@
 					<td th:text="${student.lastName}"></td>
 					<td th:text="${student.email}"></td>
 					<!-- Getting id of the student for updating the record -->
-					<td><a th:href = "@{/students/edit/{id}(id = ${student.id})}" class = "btn btn-primary">Update</a></td>
+					<td><a th:href = "@{/students/edit/{id}(id = ${student.id})}" class = "btn btn-primary">Update</a>
+							<a th:href = "@{/students/delete/{id}(id=${student.id})}" class = "btn btn-danger">Delete</a>
+					</td>
 				</tr>
 			</tbody>
 
